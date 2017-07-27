@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace GetType
 {
@@ -14,7 +15,7 @@ namespace GetType
         {
             this.field = field;
         }
-        private int Method(int a, int b)
+        public int Method(int a, int b)
         {
             return a * b;
         }
@@ -27,12 +28,21 @@ namespace GetType
             MyClass my = new MyClass();
             Type type;
 
-            type = my.GetType();
+            type = my.GetType();//на экземпляре класса  MyClass
             Console.WriteLine(type);
 
+            type = Type.GetType("GetType.MyClass");//static Type GetType()
+            Console.WriteLine(type);
+
+            type = typeof(MyClass);//оператор typeof()
+
+
+            Console.WriteLine("про метод");
+
+            MethodInfo methodType =type.GetMethod("Method");
+            Console.WriteLine(methodType);
 
             Console.ReadKey();
-
         }
     }
 }
